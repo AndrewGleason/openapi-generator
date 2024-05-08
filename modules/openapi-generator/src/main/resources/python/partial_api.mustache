@@ -5,14 +5,40 @@
         {{/notes}}
 
         {{#allParams}}
+        {{#vars}}
+        {{#required}}
+        :param {{paramName}}:{{#description}} {{{.}}}{{/description}}{{#required}} (required){{/required}}{{#optional}}(optional){{/optional}}
+        :type {{paramName}}: {{dataType}}
+        {{/required}}
+        {{/vars}}
+        {{#vars}}
+        {{^required}}
         :param {{paramName}}:{{#description}} {{{.}}}{{/description}}{{#required}} (required){{/required}}{{#optional}}(optional){{/optional}}
         :type {{paramName}}: {{dataType}}{{#optional}}, optional{{/optional}}
+        {{/required}}
+        {{/vars}}
+        {{#isBodyParam}}
+        {{/isBodyParam}}
+        {{^isBodyParam}} 
+        :param {{paramName}}:{{#description}} {{{.}}}{{/description}}{{#required}} (required){{/required}}{{#optional}}(optional){{/optional}}
+        :type {{paramName}}: {{dataType}}{{#optional}}, optional{{/optional}}
+        {{/isBodyParam}}
         {{/allParams}}
         :return: Returns the result object.
         """ # noqa: E501
         {{#isDeprecated}}
         warnings.warn("{{{httpMethod}}} {{{path}}} is deprecated.", DeprecationWarning)
         {{/isDeprecated}}
+
+        {{#bodyParam}}
+        body = {{#bodyParam}}{{dataType}}{{/bodyParam}}(
+          {{#bodyParams}}
+          {{#vars}}
+          {{name}}={{name}},
+          {{/vars}}
+          {{/bodyParams}}
+        )
+        {{/bodyParam}}
 
         _param = self._{{operationId}}_serialize(
             {{#allParams}}

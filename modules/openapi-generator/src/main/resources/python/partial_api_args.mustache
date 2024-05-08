@@ -1,6 +1,20 @@
 (
         self,
         {{#allParams}}
+        {{#isBodyParam}} 
+        {{#vars}}
+        {{#required}}
+        {{name}}: {{dataType}},
+        {{/required}}
+        {{/vars}}
+        {{#vars}}
+        {{^required}}
+        {{name}}: Optional[{{dataType}}] = None,
+        {{/required}}
+        {{/vars}}
+        {{/isBodyParam}}
+        {{^isBodyParam}} 
         {{paramName}}: {{#required}}{{dataType}}{{/required}}{{^required}}Optional[{{dataType}}] = None{{/required}},
+        {{/isBodyParam}}
         {{/allParams}}
     )
