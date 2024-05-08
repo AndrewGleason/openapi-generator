@@ -7,14 +7,14 @@
         {{#allParams}}
         {{#vars}}
         {{#required}}
-        :param {{paramName}}:{{#description}} {{{.}}}{{/description}}{{#required}} (required){{/required}}{{#optional}}(optional){{/optional}}
-        :type {{paramName}}: {{dataType}}
+        :param {{name}}:{{#description}} {{{.}}}{{/description}}{{#required}} (required){{/required}}{{#optional}}(optional){{/optional}}
+        :type {{name}}: {{dataType}}
         {{/required}}
         {{/vars}}
         {{#vars}}
         {{^required}}
-        :param {{paramName}}:{{#description}} {{{.}}}{{/description}}{{#required}} (required){{/required}}{{#optional}}(optional){{/optional}}
-        :type {{paramName}}: {{dataType}}{{#optional}}, optional{{/optional}}
+        :param {{name}}:{{#description}} {{{.}}}{{/description}}{{#required}} (required){{/required}}{{#optional}}(optional){{/optional}}
+        :type {{name}}: {{dataType}}{{#optional}}, optional{{/optional}}
         {{/required}}
         {{/vars}}
         {{#isBodyParam}}
